@@ -3,6 +3,7 @@
 
 ### Objective:
 > Can we classify Spotify packets?
+
 The high-level methodology of our research project encompasses the systematic collection of network data from the Spotify application. We will subsequently extract important features, apply classification models, and assess results based on precision and recall metrics.
 
 ### Tasks:
@@ -12,6 +13,7 @@ The high-level methodology of our research project encompasses the systematic co
 - Apply ML models to dataset
 
 ### Evaluation:
+> How are we evaluating the ML models?
 - Compare Precision/Recall and RMSE
 
 ### Deliverables:
