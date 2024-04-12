@@ -26,6 +26,8 @@ The high-level methodology of our research project encompasses the systematic co
 ### Evaluation:
 > How are we evaluating the ML models?
 - Compare Precision/Recall and RMSE
+- Confusion Matrix
+
 | Actual Class      | Classified as non-Spotify | Classified as Spotify |
 |-------------------|---------------------------|-----------------------|
 | non-Spotify data  | True Negative             | False Positive        |
@@ -49,4 +51,5 @@ The high-level methodology of our research project encompasses the systematic co
     ├── .env                    # to save API keys
     ├── .gitignore
     ├── requirements.txt
+    ├── environment.yml
     └── README.md
