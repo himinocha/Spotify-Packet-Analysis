@@ -60,11 +60,12 @@ for packet in packets:
 
 df = pd.DataFrame(packet_lst)
 df['time'] = df['time'].astype(float)
+df['interarrival_time'] = df['time'].diff()
 
 # Calculate inter-arrival time per destination IP
 df_sorted = df.sort_values(by=['dst_ip', 'time'])
-df_sorted['time'] = pd.to_datetime(df_sorted['time'], unit='s')
-df_sorted['interarrival_time'] = df_sorted.groupby('dst_ip')['time'].diff()
+# df_sorted['time'] = pd.to_datetime(df_sorted['time'], unit='s')
+df_sorted['dst_interarrival_time'] = df_sorted.groupby('dst_ip')['time'].diff()
 
 # save into csv
 df_sorted.sort_values(by=['time']).to_csv(f'../data/{sys.argv[1]}_sorted.csv')

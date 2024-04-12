@@ -24,7 +24,7 @@ read FILENAME
 echo "Duration (in seconds):"
 read DURATION
 
-sudo tcpdump -i en0 -w "$FILENAME.pcap" &
+sudo tcpdump -tt -i en0 -w "$FILENAME.pcap" &
 TCPDUMP_PID=$!
 
 # open spotify
