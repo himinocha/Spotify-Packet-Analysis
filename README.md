@@ -36,6 +36,10 @@ The high-level methodology of our research project encompasses the systematic co
 
 ### File Structure
     .
-    ├── script                  # .py and .sh 
+    ├── script                  # .py and .sh to collect packets
     ├── data                    # .pcap and .csv
+    ├── notebook                # .ipynb for feature engineering, visualization and modeling
+    ├── visualization           # .png or .pdf (saved visualizations)
+    ├── .env                    # to save API keys
+    ├── .gitignore
     └── README.md
