@@ -4,7 +4,7 @@
 ### Objective:
 > Can we classify Spotify packets?
 
-The high-level methodology of our research project encompasses the systematic collection of network data from the Spotify application. We will subsequently extract important features, apply classification models, and assess results based on precision and recall metrics.
+The high-level methodology of our research project encompasses the systematic collection of network data from the Spotify application and Web Browser. We will subsequently extract important features, apply classification models, and evaluate based on precision and recall as metrics.
 
 ### Data:
 > .pcap and .csv
@@ -14,24 +14,30 @@ The high-level methodology of our research project encompasses the systematic co
     - source and destination IP
     - payload data of the packets
 - processed data (derivative features):
+    - inter-arrival time between packets
     - average packet inter-arrival time per destination (Spotify server)
 
 ### Tasks:
 > What mechanisms are we using
-- Collect network data using `tcpdump`
+- Collect network data using `tcpdump` and `scapy`
 - Feature engineering/extraction
 - Apply ML models to dataset
 
 ### Evaluation:
 > How are we evaluating the ML models?
 - Compare Precision/Recall and RMSE
+| Actual Class      | Classified as non-Spotify | Classified as Spotify |
+|-------------------|---------------------------|-----------------------|
+| non-Spotify data  | True Negative             | False Positive        |
+| Spotify data      | False Negative            | True Positive         |
+
 
 ### Deliverables:
 > Generated outputs
-- bash script (that performs data collection)
+- bash/py script (that performs automated data collection)
 - Raw dataset (.pcap)
 - Clean dataset
-- ML model
+- ML model (Decision Tree, Random Forest, XGBoost)
 - Final report
 
 ### File Structure
@@ -42,4 +48,5 @@ The high-level methodology of our research project encompasses the systematic co
     ├── visualization           # .png or .pdf (saved visualizations)
     ├── .env                    # to save API keys
     ├── .gitignore
+    ├── requirements.txt
     └── README.md
