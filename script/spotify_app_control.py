@@ -94,4 +94,4 @@ def spotify_action():
     # quit spotify app
     os.system("osascript -e 'tell application \"Spotify\" to quit'")
 
-spotify_action()
+# spotify_action()

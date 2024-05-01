@@ -51,7 +51,7 @@ def find_deviceID(type):
         print(f"Active device ID: {device_id}\n")
         return device_id
 
-def start_playback():
+def start_playback(playList=False):
     print("Starting Spotify playback...\n")
 
     joey = '3gJDgenxLephg09x86IxPs?si=6aad562132664b17'
@@ -59,8 +59,24 @@ def start_playback():
     blackskirts = '4bjNOhOMvqFPflwHIaS7Fw?si=1dddecefbf404f43'
     onlyInMyMind = '4PrGyX4YgCT6V3YqY7XEUw?si=d42ef78b9cc8479a'
 
+    # if playList option is on
+    if playList:
+        song_lst = [joey, unofficialboyy, blackskirts]
+
+        for song in song_lst:
+            track_uri = "spotify:track:" + song
+            try:
+                sp.start_playback(uris=[track_uri], device_id = find_deviceID('Computer'))
+                time.sleep(30)
+                sp.pause_playback()
+            except spotipy.exceptions.SpotifyException as e:
+                print(f"Error: {e}")
+        return
+    
+    # song = blackskirts
     track_uri = "spotify:track:" + blackskirts
 
+    # without playList option
     # Start playback
     try:
         sp.start_playback(uris=[track_uri], device_id = find_deviceID('Computer'))
@@ -69,7 +85,7 @@ def start_playback():
     except spotipy.exceptions.SpotifyException as e:
         print(f"Error: {e}")
 
-def spotify_action():
+def spotify_action(playList=False):
     # Open Safari www.open.spotify.com
     os.system("open -a Safari http://open.spotify.com")
 
@@ -81,10 +97,14 @@ def spotify_action():
     # os.system("open -a Spotify")
     print(sp.devices())
     time.sleep(30)
-    
+    # for loop number
+    n = 10
+    # playList = True
+    # if playList:
+    #     n = 10
 
     # play the same song 10 times
-    for _ in range(10):
+    for _ in range(n):
         # os.system(f"osascript -e '{clear_cache_script}'")
         time.sleep(3)
         start_playback()

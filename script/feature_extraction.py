@@ -1,6 +1,11 @@
-from scapy.all import rdpcap, DNSQR
+from scapy.all import Raw, rdpcap, TCP, DNSQR
+from scapy.layers.http import HTTPRequest
 import pandas as pd
 import sys
+import json
+import base64
+
+# load_layer("http")
 
 packets = rdpcap(f'../data/{sys.argv[1]}.pcap')
 
@@ -8,6 +13,12 @@ packet_lst = []
 
 for packet in packets:
     src_ip, dst_ip, src_port, dst_port, length, protocol, payload_size, query_name, spotify_or_not = (None,)*9
+
+    if packet.haslayer(HTTPRequest):
+        print('hi')
+        url = packet[HTTPRequest].Host.decode() + packet[HTTPRequest].Path.decode()
+        method = packet[HTTPRequest].Method.decode()
+        print(f"Some useful Raw data: {packet[Raw].load}")
 
     # check for IP
     if 'IP' in packet:
@@ -26,6 +37,12 @@ for packet in packets:
         src_port = packet['TCP'].sport
         dst_port = packet['TCP'].dport
         payload_size = len(packet['TCP'].payload)
+        # try:
+        #     payload = bytes(packet['TCP'].payload)
+        #     data = base64.b64decode(payload).decode('utf-8')
+        #     print(data)
+        # except:
+        #     continue
     elif 'UDP' in packet:
         src_port = packet['UDP'].sport
         dst_port = packet['UDP'].dport
@@ -57,7 +74,7 @@ for packet in packets:
     packet_lst.append(packet_data)
 
 
-
+'''
 df = pd.DataFrame(packet_lst)
 df['time'] = df['time'].astype(float)
 df['interarrival_time'] = df['time'].diff()
@@ -70,3 +87,4 @@ df_sorted['dst_interarrival_time'] = df_sorted.groupby('dst_ip')['time'].diff()
 # save into csv
 df_sorted.sort_values(by=['time']).to_csv(f'../data/{sys.argv[1]}_sorted.csv')
 df_sorted.to_csv(f'../data/{sys.argv[1]}.csv')
+'''
